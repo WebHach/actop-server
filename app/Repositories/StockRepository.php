@@ -13,13 +13,13 @@ class StockRepository
     {
         $current_day = strtolower(Carbon::now('Asia/Krasnoyarsk')->dayName);
         $date_now = \Carbon\Carbon::now()->format('Y-m-d');
-        return Stock::with('days', 'company')
+        return Stock::with('days', 'company','category')
             ->select(Stock::FIELD_SELECT)
             ->where('type', Stock::PERIODICAL)
             ->whereDate('day_begin', '<=', $date_now)
             ->whereDate('day_end', '>=', $date_now)
             ->union(
-                Stock::with('days', 'company')
+                Stock::with('days', 'company','category')
                     ->select(Stock::FIELD_SELECT)
                     ->where('type', Stock::CONSTANT)
                     ->whereHas('days', function ($query) use ($current_day) {

@@ -18,7 +18,12 @@ class Company extends Model
 
     public function getLogoAttribute($val)
     {
-        return $val ?? 'https://connpass-tokyo.s3.amazonaws.com/thumbs/85/70/85705a71d60ab08309c70071b51eba39.png';
-    }
+        $hostname = env('APP_URL');
+        if(isset($val)){
+            return $hostname.'/'.$val;
+        }else{
+            return 'https://connpass-tokyo.s3.amazonaws.com/thumbs/85/70/85705a71d60ab08309c70071b51eba39.png';
+        }
 
+    }
 }

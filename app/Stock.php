@@ -19,6 +19,7 @@ class Stock extends Model
         'name',
         'type',
         'company_id',
+        'category_id',
         'day_begin',
         'day_end',
         'time_begin',
@@ -38,5 +39,8 @@ class Stock extends Model
 
     public function company () {
         return $this->belongsTo(Company::class)->select(['id', 'name', 'logo']);
+    }
+    public function category () {
+        return $this->belongsTo(Category::class)->select(['id', 'logo']);
     }
 }

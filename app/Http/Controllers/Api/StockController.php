@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 class StockController extends Controller
 {
     /**
-     * @var StockRepository 
+     * @var StockRepository
      */
     private $stockRepository;
 
@@ -27,7 +27,7 @@ class StockController extends Controller
      */
     public function index()
     {
-        return Stock::with('company')->select(Stock::FIELD_SELECT)->orderBy('updated_at', 'desc')->get()->toJson();
+        return Stock::with('company', 'category')->select(Stock::FIELD_SELECT)->orderBy('updated_at', 'desc')->get()->toJson();
     }
 
     /**
@@ -38,7 +38,7 @@ class StockController extends Controller
      */
     public function show(Stock $stock)
     {
-        return $stock->load('company')->toJson();
+        return $stock->load('company', 'category')->toJson();
     }
 
     public function getStockCurrent()
